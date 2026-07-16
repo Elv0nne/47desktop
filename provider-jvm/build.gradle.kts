@@ -23,7 +23,13 @@ dependencies {
     // the compiler will fail with "Unresolved reference" errors.
     implementation("com.github.Blatzar:NiceHttp:0.4.18")
     implementation("org.jsoup:jsoup:1.18.1")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.18.2")
+    // NOTE: library-jvm pins this to `strictly 2.13.1` (Android TV/FireStick
+    // compatibility requirement from the upstream CloudStream `library`
+    // module). `strictly` cannot be overridden by a plain `implementation`
+    // version elsewhere in the graph — declaring 2.18.2 here would cause
+    // an unresolvable version conflict at build time, the same way it did
+    // in cs3-desktop-host/host-app.
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.1")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0")
 }
