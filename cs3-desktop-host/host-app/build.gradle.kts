@@ -8,12 +8,12 @@ plugins {
 group = "com.thitbokobe.host"
 version = "1.0.0"
 
-repositories {
-    mavenLocal()
-    google()
-    mavenCentral()
-    maven("https://jitpack.io")
-}
+// Repositories are declared centrally in settings.gradle.kts
+// (dependencyResolutionManagement), since repositoriesMode is set to
+// FAIL_ON_PROJECT_REPOS there. Declaring a `repositories { ... }` block
+// here in the project build file is not allowed and fails the build with:
+//   "Build was configured to prefer settings repositories over project
+//    repositories but repository 'MavenLocal' was added by build file..."
 
 dependencies {
     // The JVM artifact of CloudStream's `library` module, published via
