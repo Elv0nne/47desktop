@@ -51,6 +51,11 @@ application {
 tasks.shadowJar {
     archiveBaseName.set("cs3-desktop-host")
     archiveClassifier.set("")
+    // Without clearing archiveVersion, the default naming
+    // "{archiveBaseName}-{archiveVersion}.jar" produces
+    // "cs3-desktop-host-1.0.0.jar", not "cs3-desktop-host.jar" — the exact
+    // filename the CI workflow's next "cp" step expects.
+    archiveVersion.set("")
     mergeServiceFiles()
 }
 
