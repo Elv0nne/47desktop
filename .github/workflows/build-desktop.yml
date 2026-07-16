@@ -40,6 +40,12 @@ jobs:
         # với target jvm(), nên Gradle cần thấy Android SDK dù ta chỉ dùng
         # target jvm — bước này chỉ cài SDK, không build gì cho Android.
 
+      - name: Cấp quyền thực thi cho gradlew
+        working-directory: cloudstream-master
+        run: chmod +x gradlew
+        # Upload qua GitHub web (kéo thả) không giữ lại quyền thực thi của
+        # file gradlew, nên cần cấp lại thủ công trước khi chạy ./gradlew.
+
       - name: Bước 1 — Publish library module (target jvm) ra Maven local
         working-directory: cloudstream-master
         run: ./gradlew :library:publishToMavenLocal --stacktrace
