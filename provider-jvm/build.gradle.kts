@@ -40,6 +40,12 @@ kotlin {
 
 tasks.jar {
     archiveBaseName.set("anime47provider")
+    // Gradle's default jar naming is "{archiveBaseName}-{archiveVersion}.jar".
+    // Without clearing archiveVersion, this task produces
+    // "anime47provider-1.0.0.jar", not "anime47provider.jar" — which is the
+    // exact filename the CI workflow's "cp provider-jvm/build/libs/anime47provider.jar"
+    // step expects, causing "No such file or directory" otherwise.
+    archiveVersion.set("")
     // Only this provider's own classes go in the jar — library-jvm and its
     // deps are supplied separately by whatever host loads this jar.
 }
