@@ -27,7 +27,15 @@ dependencies {
     implementation("org.jsoup:jsoup:1.18.1")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.11.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.11.0")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.18.2")
+    // NOTE: library-jvm pins this to `strictly 2.13.1` (Android TV/FireStick
+    // compatibility requirement from the upstream CloudStream `library`
+    // module). `strictly` cannot be overridden by a plain `implementation`
+    // version elsewhere in the graph — declaring 2.18.2 here caused:
+    //   "Cannot find a version of 'com.fasterxml.jackson.module:jackson-module-kotlin'
+    //    that satisfies the version constraints"
+    // host-app doesn't use jackson-module-kotlin directly, so just match
+    // the version library-jvm already pins.
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.1")
 
     testImplementation(kotlin("test"))
 }
